@@ -12,6 +12,7 @@
 		920B6A2A2C11E0B2003E3A84 /* ImageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B6A292C11E0B2003E3A84 /* ImageListViewController.swift */; };
 		920B6A2F2C11E0C5003E3A84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 920B6A2E2C11E0C5003E3A84 /* Assets.xcassets */; };
 		920B6A322C11E0C5003E3A84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920B6A302C11E0C5003E3A84 /* LaunchScreen.storyboard */; };
+		920B6A3A2C11EC54003E3A84 /* FlickerImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B6A392C11EC54003E3A84 /* FlickerImageResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		920B6A2E2C11E0C5003E3A84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		920B6A312C11E0C5003E3A84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		920B6A332C11E0C5003E3A84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		920B6A392C11EC54003E3A84 /* FlickerImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerImageResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				920B6A2E2C11E0C5003E3A84 /* Assets.xcassets */,
 				920B6A302C11E0C5003E3A84 /* LaunchScreen.storyboard */,
 				920B6A332C11E0C5003E3A84 /* Info.plist */,
+				920B6A392C11EC54003E3A84 /* FlickerImageResponse.swift */,
 			);
 			path = FlickerImageTest;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 				920B6A2A2C11E0B2003E3A84 /* ImageListViewController.swift in Sources */,
 				920B6A262C11E0B2003E3A84 /* AppDelegate.swift in Sources */,
 				920B6A282C11E0B2003E3A84 /* SceneDelegate.swift in Sources */,
+				920B6A3A2C11EC54003E3A84 /* FlickerImageResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
