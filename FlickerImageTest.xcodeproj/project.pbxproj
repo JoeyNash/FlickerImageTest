@@ -13,8 +13,8 @@
 		920B6A2F2C11E0C5003E3A84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 920B6A2E2C11E0C5003E3A84 /* Assets.xcassets */; };
 		920B6A322C11E0C5003E3A84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920B6A302C11E0C5003E3A84 /* LaunchScreen.storyboard */; };
 		920B6A3A2C11EC54003E3A84 /* FlickerImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B6A392C11EC54003E3A84 /* FlickerImageResponse.swift */; };
-		920B6A422C11F10C003E3A84 /* FlickerImageTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B6A412C11F10C003E3A84 /* FlickerImageTestTests.swift */; };
 		920B6A492C11F139003E3A84 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B6A482C11F139003E3A84 /* String+Extensions.swift */; };
+		920B6A4B2C11FB2F003E3A84 /* FlickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B6A4A2C11FB2F003E3A84 /* FlickerService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +37,8 @@
 		920B6A332C11E0C5003E3A84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		920B6A392C11EC54003E3A84 /* FlickerImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerImageResponse.swift; sourceTree = "<group>"; };
 		920B6A3F2C11F10C003E3A84 /* FlickerImageTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickerImageTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		920B6A412C11F10C003E3A84 /* FlickerImageTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerImageTestTests.swift; sourceTree = "<group>"; };
 		920B6A482C11F139003E3A84 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		920B6A4A2C11FB2F003E3A84 /* FlickerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				920B6A242C11E0B2003E3A84 /* FlickerImageTest */,
-				920B6A402C11F10C003E3A84 /* FlickerImageTestTests */,
 				920B6A232C11E0B2003E3A84 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,16 +87,9 @@
 				920B6A332C11E0C5003E3A84 /* Info.plist */,
 				920B6A392C11EC54003E3A84 /* FlickerImageResponse.swift */,
 				920B6A482C11F139003E3A84 /* String+Extensions.swift */,
+				920B6A4A2C11FB2F003E3A84 /* FlickerService.swift */,
 			);
 			path = FlickerImageTest;
-			sourceTree = "<group>";
-		};
-		920B6A402C11F10C003E3A84 /* FlickerImageTestTests */ = {
-			isa = PBXGroup;
-			children = (
-				920B6A412C11F10C003E3A84 /* FlickerImageTestTests.swift */,
-			);
-			path = FlickerImageTestTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920B6A4B2C11FB2F003E3A84 /* FlickerService.swift in Sources */,
 				920B6A492C11F139003E3A84 /* String+Extensions.swift in Sources */,
 				920B6A2A2C11E0B2003E3A84 /* ImageListViewController.swift in Sources */,
 				920B6A262C11E0B2003E3A84 /* AppDelegate.swift in Sources */,
@@ -212,7 +205,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				920B6A422C11F10C003E3A84 /* FlickerImageTestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
