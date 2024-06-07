@@ -15,6 +15,7 @@
 		920B6A3A2C11EC54003E3A84 /* FlickerImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B6A392C11EC54003E3A84 /* FlickerImageResponse.swift */; };
 		920B6A492C11F139003E3A84 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B6A482C11F139003E3A84 /* String+Extensions.swift */; };
 		920B6A4B2C11FB2F003E3A84 /* FlickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B6A4A2C11FB2F003E3A84 /* FlickerService.swift */; };
+		920B6A4D2C135392003E3A84 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B6A4C2C135392003E3A84 /* ThumbnailCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		920B6A3F2C11F10C003E3A84 /* FlickerImageTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickerImageTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		920B6A482C11F139003E3A84 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		920B6A4A2C11FB2F003E3A84 /* FlickerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerService.swift; sourceTree = "<group>"; };
+		920B6A4C2C135392003E3A84 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				920B6A392C11EC54003E3A84 /* FlickerImageResponse.swift */,
 				920B6A482C11F139003E3A84 /* String+Extensions.swift */,
 				920B6A4A2C11FB2F003E3A84 /* FlickerService.swift */,
+				920B6A4C2C135392003E3A84 /* ThumbnailCell.swift */,
 			);
 			path = FlickerImageTest;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 			files = (
 				920B6A4B2C11FB2F003E3A84 /* FlickerService.swift in Sources */,
 				920B6A492C11F139003E3A84 /* String+Extensions.swift in Sources */,
+				920B6A4D2C135392003E3A84 /* ThumbnailCell.swift in Sources */,
 				920B6A2A2C11E0B2003E3A84 /* ImageListViewController.swift in Sources */,
 				920B6A262C11E0B2003E3A84 /* AppDelegate.swift in Sources */,
 				920B6A282C11E0B2003E3A84 /* SceneDelegate.swift in Sources */,
@@ -339,7 +343,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

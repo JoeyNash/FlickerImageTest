@@ -13,6 +13,13 @@ protocol FlickerService: AnyObject {
 }
 
 class RealFlickerService: FlickerService {
+
+  private static var decoder: JSONDecoder = {
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    return decoder
+  }()
+
   var imageCache: [String: UIImage] = [:]
   var inProgressImageFetches: [String: [(Result<UIImage, Error>) -> Void]] = [:]
   let searchURL = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags="
@@ -26,12 +33,20 @@ class RealFlickerService: FlickerService {
     let request = URLRequest(url: requestURL)
     URLSession.shared.dataTask(with: request) { data, response, error in
       guard (response as? HTTPURLResponse)?.statusCode == 200,
-            let data = data,
-            let flickrResponse = try? JSONDecoder().decode(FlickrResponse.self, from: data) else {
-        completionHandler(.failure(NSError(domain: "Invalid Response", code: -3)))
+            let data = data else {
+              DispatchQueue.main.async {
+                completionHandler(.failure(NSError(domain: "Invalid Response", code: -3)))
+              }
         return
       }
-      completionHandler(.success(flickrResponse))
+      do {
+        let flickrResponse = try Self.decoder.decode(FlickrResponse.self, from: data)
+        DispatchQueue.main.async {
+          completionHandler(.success(flickrResponse))
+        }
+      } catch let error {
+        print(String(describing: error))
+      }
     }.resume()
   }
   
@@ -59,13 +74,13 @@ class RealFlickerService: FlickerService {
     URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
       // Inner function we only need in this context to run through all completions when the initial request returns
       func runCompletions(withResult result: Result<UIImage, Error>) {
-        for completion in self?.inProgressImageFetches[url] ?? [] {
-          DispatchQueue.main.async {
+        DispatchQueue.main.async {
+          for completion in self?.inProgressImageFetches[url] ?? [] {
             completion(result)
           }
+          // Nil out the completions for the current request
+          self?.inProgressImageFetches[url] = nil
         }
-        // Nil out the completions for the current request
-        self?.inProgressImageFetches[url] = nil
       }
       // Make sure we received an image
       guard (response as? HTTPURLResponse)?.statusCode == 200,
