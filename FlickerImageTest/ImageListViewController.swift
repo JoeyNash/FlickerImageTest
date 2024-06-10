@@ -19,7 +19,6 @@ class ImageListViewController: UIViewController {
     let textField = UITextField(frame: .zero)
     textField.placeholder = "Enter Tags Here"
     textField.delegate = self
-    textField.translatesAutoresizingMaskIntoConstraints = false
     textField.backgroundColor = .white
     textField.addShadow()
     return textField
@@ -32,7 +31,6 @@ class ImageListViewController: UIViewController {
     collectionView.dataSource = self
     collectionView.delegate = self
     collectionView.register(ThumbnailCell.self, forCellWithReuseIdentifier: ThumbnailCell.reuseId)
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.backgroundColor = .clear
     return collectionView
   }()
@@ -49,14 +47,14 @@ class ImageListViewController: UIViewController {
     view.backgroundColor = UIColor(red: 1, green: 253/255, blue: 208/255, alpha: 1)
     // Setup Search
     view.addSubview(searchBox)
-    NSLayoutConstraint.activate([
+    searchBox.setAutoLayout([
       searchBox.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: LayoutConstants.margin),
       searchBox.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.margin),
       searchBox.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -LayoutConstants.margin)
     ])
     // Setup CollectionView
     view.addSubview(collectionView)
-    NSLayoutConstraint.activate([
+    collectionView.setAutoLayout([
       collectionView.topAnchor.constraint(equalTo: searchBox.bottomAnchor, constant: LayoutConstants.padding),
       collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.margin),
       collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -LayoutConstants.margin),

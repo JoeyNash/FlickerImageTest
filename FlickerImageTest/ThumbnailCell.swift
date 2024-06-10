@@ -21,8 +21,6 @@ class ThumbnailCell: UICollectionViewCell {
   lazy var imageView: UIImageView = {
     let imageView = UIImageView(image: Self.notFound)
     imageView.contentMode = .scaleAspectFit
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    // Setting a shadow
     imageView.addShadow()
     return imageView
   }()
@@ -30,7 +28,7 @@ class ThumbnailCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     contentView.addSubview(imageView)
-    NSLayoutConstraint.activate([
+    imageView.setAutoLayout([
       imageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: LayoutConstants.margin),
       imageView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -LayoutConstants.margin),
       imageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.margin),

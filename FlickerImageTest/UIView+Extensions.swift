@@ -14,4 +14,15 @@ extension UIView {
     layer.shadowOpacity = 0.2
     layer.shadowRadius = 4
   }
+
+  /// Sets NSLayout Constraints. Automatically handles autoresizingMask
+  /// - Note: Requires `self` to have a SuperView to avoid a crash
+  func setAutoLayout(_ constraints: [NSLayoutConstraint]) {
+    guard !(superview == nil) else {
+      assertionFailure("Cannot set constraints before adding to superView")
+      return
+    }
+    translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate(constraints)
+  }
 }
