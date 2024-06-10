@@ -55,7 +55,7 @@ class ImageDetailViewController: UIViewController {
 
   lazy var imageSizeLabel: UILabel = {
     let label = UILabel(frame: .zero)
-    label.text = "Height: 0px, Width: 0px"
+    label.text = "Height: 0 px, Width: 0 px"
     label.textAlignment = .center
     return label
   }()
@@ -135,7 +135,7 @@ class ImageDetailViewController: UIViewController {
       switch result {
         case .success(let image):
           self?.imageView.image = image
-          self?.imageSizeLabel.text = "Height: \(image.size.height * image.scale)px, Width: \(image.size.width * image.scale)px"
+          self?.imageSizeLabel.text = "Height: \(image.size.height * image.scale) px, Width: \(image.size.width * image.scale) px"
         case .failure(let error):
           print(String(describing: error))
       }
