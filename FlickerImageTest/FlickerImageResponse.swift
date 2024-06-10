@@ -15,11 +15,10 @@ struct FlickrItem: Codable {
   let title: String
   let media: FlickrMedia
   let dateTaken: Date
-  let description: String
   let author: String
   let tags: String
   private enum CodingKeys: String, CodingKey {
-    case title, media, description, author, tags
+    case title, media, author, tags
     case dateTaken = "date_taken"
   }
 }

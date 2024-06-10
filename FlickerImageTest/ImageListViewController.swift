@@ -100,7 +100,10 @@ extension ImageListViewController: UICollectionViewDelegate, UICollectionViewDat
   }
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    // TODO: Navigate to detailView
+    let item = items[indexPath.row]
+    let detailVC = ImageDetailViewController(withImage: item, andServiceProvider: flickerService)
+    detailVC.title = item.title
+    self.navigationController?.pushViewController(detailVC, animated: true)
   }
 }
 
