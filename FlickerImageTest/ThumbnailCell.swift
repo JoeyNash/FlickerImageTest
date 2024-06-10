@@ -20,7 +20,10 @@ class ThumbnailCell: UICollectionViewCell {
 
   lazy var imageView: UIImageView = {
     let imageView = UIImageView(image: Self.notFound)
+    imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
+    // Setting a shadow
+    imageView.addShadow()
     return imageView
   }()
 
@@ -31,7 +34,7 @@ class ThumbnailCell: UICollectionViewCell {
       imageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: LayoutConstants.margin),
       imageView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -LayoutConstants.margin),
       imageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.margin),
-      imageView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -LayoutConstants.margin)
+      imageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -LayoutConstants.margin)
     ])
   }
   

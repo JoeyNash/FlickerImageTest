@@ -20,6 +20,8 @@ class ImageListViewController: UIViewController {
     textField.placeholder = "Enter Tags Here"
     textField.delegate = self
     textField.translatesAutoresizingMaskIntoConstraints = false
+    textField.backgroundColor = .white
+    textField.addShadow()
     return textField
   }()
 
@@ -44,7 +46,7 @@ class ImageListViewController: UIViewController {
 
   override func loadView() {
     super.loadView()
-    view.backgroundColor = UIColor(hue: 60, saturation: 19, brightness: 100, alpha: 1)
+    view.backgroundColor = UIColor(red: 1, green: 253/255, blue: 208/255, alpha: 1)
     // Setup Search
     view.addSubview(searchBox)
     NSLayoutConstraint.activate([
@@ -106,7 +108,7 @@ extension ImageListViewController: UICollectionViewDelegate, UICollectionViewDat
 
 extension ImageListViewController: UITextFieldDelegate {
   func textFieldDidChangeSelection(_ textField: UITextField) {
-    guard let text = textField.text else {
+    guard let text = textField.text?.addingPercentEncoding(withAllowedCharacters: .alphanumerics) else {
       return
     }
     flickerService.getItemsBySearching(forTags: text) { [weak self] result in
