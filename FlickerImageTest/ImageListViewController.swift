@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class ImageListViewController: UIViewController {
 
@@ -36,11 +37,9 @@ class ImageListViewController: UIViewController {
   }()
 
   var flickerService: FlickerService = RealFlickerService()
-  var items: [FlickrItem] = [] {
-    didSet {
-      self.collectionView.reloadData()
-    }
-  }
+  var items: [FlickrItem] = []
+
+  var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
 
   override func loadView() {
     super.loadView()
@@ -112,14 +111,22 @@ extension ImageListViewController: UITextFieldDelegate {
     guard let text = textField.text?.addingPercentEncoding(withAllowedCharacters: .alphanumerics) else {
       return
     }
-    flickerService.getItemsBySearching(forTags: text) { [weak self] result in
-      switch result {
-        case.success(let response):
+    flickerService.getItemsBySearching(forTags: text)
+      .receive(on: DispatchQueue.main)
+      .sink(
+        receiveCompletion: { completion in
+          switch completion {
+            case .finished:
+              print("Successfully found items")
+            case .failure(let error):
+              print(String(describing: error))
+          }
+        },
+        receiveValue: { [weak self] response in
           self?.items = response.items
-        case .failure(let error):
-          print(String(describing: error))
-      }
-    }
+          self?.collectionView.reloadData()
+        })
+      .store(in: &cancellables)
   }
 }
 

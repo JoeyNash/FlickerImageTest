@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import Combine
 
 protocol FlickerService: AnyObject {
-  func getItemsBySearching(forTags tagList: String, completionHandler: @escaping (Result<FlickrResponse, Error>) -> Void)
+  func getItemsBySearching(forTags tagList: String) -> AnyPublisher<FlickrResponse, Error>
   func fetchImage(forURL url: String, completionHandler: @escaping (Result<UIImage, Error>) -> Void)
 }
 
@@ -24,30 +25,22 @@ class RealFlickerService: FlickerService {
   var inProgressImageFetches: [String: [(Result<UIImage, Error>) -> Void]] = [:]
   let searchURL = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags="
 
-  func getItemsBySearching(forTags tagList: String, completionHandler: @escaping (Result<FlickrResponse, Error>) -> Void) {
+  func getItemsBySearching(forTags tagList: String) ->AnyPublisher<FlickrResponse, Error> {
     guard let requestURL = URL(string: searchURL+tagList) else {
-      completionHandler(.failure(NSError(domain: "Bad URL", code: -1)))
-      return
+      return Fail(error: NSError(domain: "Bad URL", code: -1))
+        .eraseToAnyPublisher()
     }
 
     let request = URLRequest(url: requestURL)
-    URLSession.shared.dataTask(with: request) { data, response, error in
-      guard (response as? HTTPURLResponse)?.statusCode == 200,
-            let data = data else {
-              DispatchQueue.main.async {
-                completionHandler(.failure(NSError(domain: "Invalid Response", code: -3)))
-              }
-        return
-      }
-      do {
-        let flickrResponse = try Self.decoder.decode(FlickrResponse.self, from: data)
-        DispatchQueue.main.async {
-          completionHandler(.success(flickrResponse))
+    return URLSession.shared.dataTaskPublisher(for: request)
+      .tryMap { result in
+        guard (result.response as? HTTPURLResponse)?.statusCode == 200 else {
+          throw URLError(.badServerResponse)
         }
-      } catch let error {
-        print(String(describing: error))
+        return result.data
       }
-    }.resume()
+      .decode(type: FlickrResponse.self, decoder: Self.decoder)
+      .eraseToAnyPublisher()
   }
   
   func fetchImage(forURL url: String, completionHandler: @escaping (Result<UIImage, Error>) -> Void) {
