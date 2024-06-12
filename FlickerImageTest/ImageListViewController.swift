@@ -36,11 +36,7 @@ class ImageListViewController: UIViewController {
   }()
 
   var flickerService: FlickerService = RealFlickerService()
-  var items: [FlickrItem] = [] {
-    didSet {
-      self.collectionView.reloadData()
-    }
-  }
+  var items: [FlickrItem] = []
 
   override func loadView() {
     super.loadView()
@@ -74,7 +70,17 @@ class ImageListViewController: UIViewController {
     )
   }
 
-
+  @MainActor
+  func getItems(forTags tags: String) {
+    Task {
+      do {
+        items = try await flickerService.getItemsBySearching(forTags: tags).items
+        collectionView.reloadData()
+      } catch let error {
+        print(String(describing: error))
+      }
+    }
+  }
 }
 
 extension ImageListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -88,12 +94,11 @@ extension ImageListViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     let imageUrl = items[indexPath.row].media.imageURL
     thumbnailCell.imageUrl = imageUrl
-    flickerService.fetchImage(forURL: imageUrl) { [weak thumbnailCell] result in
-      switch result {
-        case .success(let image):
-          thumbnailCell?.setImage(from: imageUrl, image)
-        case .failure(let error):
-          print(String(describing: error))
+    Task { @MainActor [weak thumbnailCell] in
+      do {
+        thumbnailCell?.setImage(from: imageUrl, try await flickerService.fetchImage(forURL: imageUrl))
+      } catch let error {
+        print(String(describing: error))
       }
     }
     return thumbnailCell
@@ -112,14 +117,7 @@ extension ImageListViewController: UITextFieldDelegate {
     guard let text = textField.text?.addingPercentEncoding(withAllowedCharacters: .alphanumerics) else {
       return
     }
-    flickerService.getItemsBySearching(forTags: text) { [weak self] result in
-      switch result {
-        case.success(let response):
-          self?.items = response.items
-        case .failure(let error):
-          print(String(describing: error))
-      }
-    }
+    getItems(forTags: text)
   }
 }
 

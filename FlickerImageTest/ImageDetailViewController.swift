@@ -131,14 +131,14 @@ class ImageDetailViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    flickrService.fetchImage(forURL: imageInfo.media.imageURL, completionHandler: { [weak self] result in
-      switch result {
-        case .success(let image):
-          self?.imageView.image = image
-          self?.imageSizeLabel.text = "Height: \(image.size.height * image.scale) px, Width: \(image.size.width * image.scale) px"
-        case .failure(let error):
-          print(String(describing: error))
+    Task { @MainActor in
+      do {
+        let image = try await flickrService.fetchImage(forURL: imageInfo.media.imageURL)
+        self.imageView.image = image
+        self.imageSizeLabel.text = "Height: \(image.size.height * image.scale) px, Width: \(image.size.width * image.scale) px"
+      } catch let error {
+        print(String(describing: error))
       }
-    })
+    }
   }
 }
